@@ -519,3 +519,285 @@ print(cwd)
 pwd = os.pardir
 print(f'{os.path.abspath(cwd+"/"+pwd)}')
 # %%
+vals = [25, 30, 33, 35, 40, 180]
+new_vals = [i + 32 for i in vals]
+
+print(new_vals)
+# %%
+def hours_to_seconds(hours):
+    return hours * 60 * 60
+
+hours_to_seconds(8)
+#%%
+def time_to_seconds(hours,minutes):
+    print(hours * 60 * 60 + minutes * 60)
+
+time_to_seconds(1,50)
+# %%
+d = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4
+}
+
+d['two']
+
+# %%
+import random
+random.seed(2427)
+def efficient_sample(n):
+  x = [random.random() for i in range(n)]
+  return x
+
+efficient_sample(20)
+# %%
+[
+i for i in range(5) if i > 2
+]
+# %%
+[i * 3 for i in range(5)]
+
+# %%
+[i * 2 for i in range(5)]
+# %%
+d = {
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4
+}
+
+d.get('three')
+
+# %%
+import numpy as np
+age=[1,2,3,4,5,6,7,8]
+average_age = np.mean(age)
+spread_age = np.std_dev(age)
+
+print(average_age)
+print(spread_age.round(2))
+# %%
+import pandas as pd
+data={'temperature':[1,2,3],
+  'luminosity':[1,2,3],
+  'radius':[7,8,9]}
+
+
+column_names = [
+  'temperature',
+  'luminosity',
+  'radius'
+]
+stars = pd.DataFrame(data,
+columns=['A','B','C'])
+# stars = stars.set_index()
+print(stars.describe)
+
+# %%
+import re
+
+def validate_user(username, minlen):
+    """Checks if the received username matches the required conditions."""
+    if type(username) != str:
+        raise TypeError("username must be a string")
+    if minlen < 1:
+        raise ValueError("minlen must be at least 1")
+
+    # Usernames can't be shorter than minlen
+    if len(username) < minlen:
+        return False
+    # Usernames can only use letters, numbers, dots and underscores
+    if re.match('^[a-zA-Z]', username):
+        return True
+    return False
+
+
+
+print(validate_user("blue.kale", 3)) # True
+print(validate_user(".blue.kale", 3)) # Currently True, should be False
+print(validate_user("red_quinoa", 4)) # True
+print(validate_user("_red_quinoa", 4)) # Currently True, should be False
+# %%
+import re
+def compare_strings(string1, string2):
+  #Convert both strings to lowercase 
+  #and remove leading and trailing blanks
+  string1 = string1.lower().strip()
+  string2 = string2.lower().strip()
+
+  #Ignore punctuation
+  punctuation = r"[.?!,;:-']"
+  string1 = re.sub(punctuation, r"", string1)
+  string2 = re.sub(punctuation, r"", string2)
+
+  #DEBUG CODE GOES HERE
+  print(string1)
+
+  return string1 == string2
+
+print(compare_strings("Have a Great Day!", "Have a great day?")) # True
+print(compare_strings("It's raining again.", "its raining, again")) # True
+print(compare_strings("Learn to count: 1, 2, 3.", "Learn to count: one, two, three.")) # False
+print(compare_strings("They found some body.", "They found somebody.")) # False
+
+# %%
+
+import datetime
+from datetime import date
+
+def add_year(date_obj):
+  try:
+    new_date_obj = date_obj.replace(year = date_obj.year + 1)
+  except ValueError:
+    # This gets executed when the above method fails, 
+    # which means that we're making a Leap Year calculation
+    new_date_obj = date_obj.replace(year = date_obj.year + 4)
+  return new_date_obj
+
+def next_date(date_string):
+  # Convert the argument from string to date object
+  date_obj = datetime.datetime.strptime(date_string, r"%Y-%m-%d")
+  next_date_obj = add_year(date_obj)
+
+  # Convert the datetime object to string, 
+  # in the format of "yyyy-mm-dd"
+  next_date_string = next_date_obj.strftime("%Y-%m-%d")
+  return next_date_string
+
+today = date.today()  # Get today's date
+print(next_date(str(today))) 
+# Should return a year from today, unless today is Leap Day
+
+print(next_date("2021-01-01")) # Should return 2022-01-01
+print(next_date("2020-02-29")) # Should return 2024-02-29
+# %%
+import turtle
+
+Tex=turtle.Turtle()
+window = turtle.Screen()
+for i in range(6):
+    Tex.forward(100)
+    Tex.left(60)
+window.exitonclick()
+# turtle.done()
+# %%
+sports = ['cricket', 'football', 'volleyball', 'baseball', 'softball', 'track and field', 'curling', 'ping pong', 'hockey']
+l=len(sports)
+last = sports[l-3:]
+print(last)
+# %%
+by = "You are"
+az = "doing a great "
+io = "job"
+qy = "keep it up!"
+message = f"{by} {az}{io}, {qy}"
+print(message)  
+# %%
+fruits = ['apple', 'pear', 'apricot', 'cherry', 'peach']
+# for n in range(5):
+#     print(n, fruits[n])
+for i,j in enumerate(fruits):
+    print(i," : ",j)
+# %%
+sentence = "students flock to the arb for a variety of outdoor activities such as jogging and picnicking"
+
+same_letter_count=0
+for i in sentence.split(' '):
+    if i.startswith(i[0]) == i.endswith(i[0]):
+        same_letter_count+=1
+print(same_letter_count)
+# %%
+items = ["whirring", "wow!", "calendar", "wry", "glass", "", "llama","tumultuous","owing"]
+acc_num=0
+for i in items:
+    if 'w' in i:
+        acc_num+=1
+print(acc_num)
+
+#%%
+sentence = "python is a high level general purpose programming language that can be applied to many different classes of problems."
+num_a_or_e=0
+for i in sentence.split():
+    if 'a' in i or 'e' in i:
+        num_a_or_e+=1
+print(num_a_or_e)
+# %%
+s = "singing in the rain and playing in the rain are two entirely different situations but both can be fun"
+vowels = ['a','e','i','o','u']
+num_vowels=0
+for i in s:
+    if i in vowels:
+        num_vowels+=1
+print(num_vowels)
+# %%
+b = ['q', 'u', 'i']
+z = b
+b[1] = 'i'
+z.remove('i')
+print(z)
+print(b)
+# %%
+sports = ['cricket', 'football', 'volleyball', 'baseball', 'softball', 'track and field', 'curling', 'ping pong', 'hockey']
+
+sports.insert(2,'horseback')
+print(sports)
+# %%
+trav_dest = ['Beirut', 'Milan', 'Pittsburgh', 'Buenos Aires', 'Nairobi', 'Kathmandu', 'Osaka', 'London', 'Melbourne']
+trav_dest.pop(len(trav_dest)-2)
+print(trav_dest)
+# %%
+
+str1 = "I love python"
+# HINT: what's the accumulator? That should go here.
+chars =[]
+for i in str1:
+    chars.append(i)
+print(chars)
+# %%
+
+wrds = ["end", 'work', "play", "start", "walk", "look", "open", "rain", "learn", "clean"]
+past_wrds =[]
+for wrd in wrds:
+    wrd+='ed'
+    past_wrds.append(wrd)
+print(past_wrds)
+# %%
+scores = "67 80 90 78 93 20 79 89 96 97 92 88 79 68 58 90 98 100 79 74 83 88 80 86 85 70 90 100"
+
+a_scores=0
+for score in scores.split():
+    if int(score) >= 90:
+        a_scores+=1
+print(a_scores)
+# %%
+stopwords = ['to', 'a', 'for', 'by', 'an', 'am', 'the', 'so', 'it', 'and', "The"]
+org = "The organization for health, safety, and education"
+acro=""
+for i in org.split():
+    if i not in stopwords:
+        acro+=i[0].upper()
+print(acro)
+# %%
+stopwords = ['to', 'a', 'for', 'by', 'an', 'am', 'the', 'so', 'it', 'and', 'The']
+sent = "The water earth and air are vital"
+acro=[]
+for i in sent.split():
+    if i not in stopwords:
+        acro.append(i[0:2].upper())
+acro='. '.join(acro)
+print(acro)
+# %%
+# palindrome
+p_phrase = "was it a car or a cat I saw"
+r_phrase = p_phrase[::-1]
+print(p_phrase,r_phrase,sep="\n")
+
+# %%
+
+inventory = ["shoes, 12, 29.99", "shirts, 20, 9.99", "sweatpants, 25, 15.00", "scarves, 13, 7.75"]
+for i in inventory:
+    item,stock,cost=i.split(', ')
+    print(f"The store has {stock} {item}, each for {cost} USD.")
+# %%
