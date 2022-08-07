@@ -1,7 +1,9 @@
 #%%
 from cmath import isnan
 from curses.ascii import isalpha, isspace
+from itertools import count
 from operator import contains
+from statistics import mean
 from tokenize import group
 
 
@@ -223,7 +225,7 @@ for i in data_set:
     print(i,data.count(i))
 
 # %%
-
+""" Dict count freq  """
 fname = "mbox-short.txt"
 words =[]
 counts = dict()
@@ -800,4 +802,335 @@ inventory = ["shoes, 12, 29.99", "shirts, 20, 9.99", "sweatpants, 25, 15.00", "s
 for i in inventory:
     item,stock,cost=i.split(', ')
     print(f"The store has {stock} {item}, each for {cost} USD.")
+# %%
+"""
+    Count number of 
+    chars, words and lines
+    in a file
+"""
+with open("travel_plans.txt","r") as f:
+    num_chars=num_words=num_lines=0
+    for line in f:
+        num_lines += 1
+        num_chars += len(line)
+        line=line.split()
+        num_words += len(line)
+    print(f"Total \n Characters : {num_chars} \n Words : {num_words} \n Lines : {num_lines}")  
+# %%
+""" Print first 33 chars of the file """
+with open("travel_plans.txt","r") as f:
+    line=f.read()
+    msg=line[:33]
+    print(msg)
+# %%
+""" assign 2nd word of each line to list """
+with open("travel_plans.txt","r") as f:
+    three=[]
+    for line in f:
+        line=line.split()
+        three.append(line[1])
+
+    print(three)
+
+# %%
+
+with open("travel_plans.txt","r") as f:
+    p_words=[]
+    for line in f:
+        line=line.split()
+        for word in line:
+            if 'p' in word:
+                p_words.append(word)
+
+    print(p_words)
+# %%
+""" find avg price and max-rate in SP500.txt 
+ col - 2 is  price, col - 5 is rate 
+ only read data June 2016 to May 2017 
+ i.e, lines 6:18
+"""
+ 
+with open("SP500.txt","r") as f:
+    rates = []
+    avg=0
+    count=0
+    lines = f.readlines()[6:18]
+    for line in lines:
+        line=line.split(',')
+        # print(line[0]," : ",line[1]," : ",line[7])
+        avg+=float(line[1])
+        count+=1
+        rates.append(line[5])
+
+    mean_SP = avg/count
+    max_interest = max([float(i) for i in rates])
+    print(mean_SP,max_interest)
+# %%
+swimmers = {'Manuel':4, 'Lochte':12, 'Adrian':7, 'Ledecky':5, 'Dirado':4}
+
+swimmers["Phelps"] = 23
+# %%
+""" Max key and Max value """
+
+d = {'a': 194, 'b': 54, 'c':34, 'd': 44, 'e': 312, 'full':31}
+
+k = max(d, key=d.get) #key
+print("key " + k + " has the highest value,",d[k])
+
+# %%
+Junior = {'SI 206':4, 'SI 310':4, 'BL 300':3,
+ 'TO 313':3, 'BCOM 350':1, 'MO 300':3}
+
+credits = Junior.values()
+print(sum(credits))
+# %%
+""" count chars freq 
+    removing spaces """
+str1 = "peter piper picked a peck of pickled peppers".replace(" ", "")
+freq={}
+for char in str1:
+    freq[char] = freq.get(char,0) + 1
+for k,v in freq.items():
+    print(k,v)
+# %%
+""" freq words in string """
+str1 = "I wish I wish with all my heart to fly with dragons in a land apart".split()
+
+freq_words={}
+for word in str1:
+    freq_words[word] = freq_words.get(word,0) + 1
+print(freq_words)
+# %%
+""" most adn least freq char """
+sally = "sally sells sea shells by the sea shore"
+
+characters ={}
+for char in sally:
+    characters [char] = characters .get(char,0) + 1
+best_char = max(characters, key=characters.get)
+worst_char = min(characters, key=characters.get)
+print(
+    "Most Freq -",best_char,"with Freq =",
+    characters[best_char],
+    "\nLeast Freq -",worst_char,"with Freq =",
+    characters[worst_char]
+)
+
+
+# %%
+
+tuples_lst = [('Beijing', 'China', 2008),
+ ('London', 'England', 2012),
+  ('Rio', 'Brazil', 2016, 'Current'),
+   ('Tokyo', 'Japan', 2020, 'Future')]
+country = ([i[1] for i in tuples_lst])
+print(country)
+# %%
+olymp = ('Rio', 'Brazil', 2016)
+city, country, year = olymp
+# %%
+"""
+STOP when u reach 7 in a list
+return sublist upto number 7
+not include 7
+using BREAK
+"""
+def sublist(lst):
+    i=0
+    sublist = []
+    while lst[i] != 7:
+        sublist.append(lst[i])
+        i+=1
+        if i == len(lst):
+            break
+    return sublist
+print(sublist([1, 6, 2, 3, 9]))
+#%%
+""" 
+STOP when u reach 7 in a list
+return sublist upto number 7
+not include 7
+USING SLICES"""
+def sublist(lst):
+    i=0
+
+    while i < len(lst):
+        if lst[i] == 7:
+            return lst[:i]
+        i+=1
+    return lst[:i]
+print(sublist([1, 6, 2, 7, 3, 9]))
+
+# %%
+""" USING WHile and break"""
+def sublist(string_lst):
+    i=0
+    sublist = []
+    while string_lst[i] != "bye":
+        sublist.append(string_lst[i])
+        i+=1
+        if i == len(string_lst):
+            break
+    return sublist
+print(sublist(["hi","bye","STOP"]))
+
+
+# %%
+"""
+USING Slices
+"""
+def sublist(string_lst):
+    i=0
+    while i < len(string_lst):
+        if string_lst[i] == "STOP":
+            return string_lst[:i]
+        i+=1
+    return string_lst[:i]
+print(sublist(["hi","bye","STOP"]))
+
+#%%
+
+def beginning(string_lst):
+    i=0
+    sublist = []
+    while string_lst[i] != "bye":
+        sublist.append(string_lst[i])
+        i+=1
+        if i == len(string_lst):
+            break
+    return sublist
+print(beginning(["hi","bye"]))
+# %%
+"""" LAMBDA func ANONYMOUS func """
+print((lambda s:s[::-1])("hello world"))
+# %%
+"""  non-default argument (b)
+ follows default argument (a) """
+def sum(x,z=5):
+    return z + x
+
+# def sum(z=5, x):    
+#     #error x is non default and 
+#     # it cannot come after default arg
+#     return z + x  
+
+#%%
+def test(x,bool=True,dict1={2:3, 4:5, 6:8}):
+    if bool == True:
+        if x in dict1.keys():
+            return dict1[x]
+    return False
+    
+#%%
+
+def checkingIfIn(s,direction=True,d = {
+    'apple': 2,
+     'pear': 1,
+      'fruit': 19,
+       'orange': 5,
+        'banana': 3,
+         'grapes': 2,
+          'watermelon': 7}):
+    if direction == True:
+        if s in d.keys():
+            return True
+        return False
+    else :
+        if s not in d.keys():
+            return True
+        return False
+# %%
+def checkingIfIn(a, direction = True, d={
+    'apple': 2,
+    'pear': 1,
+    'fruit': 19,
+    'orange': 5,
+    'banana': 3,
+    'grapes': 2,
+    'watermelon': 7}):
+    if direction == True:
+        if a in d:
+            return d[a]
+        else:
+            return False
+    else:
+        if a not in d:
+            return True
+        else:
+            return d[a]
+c_false = checkingIfIn('hello')
+print(c_false)
+c_true = checkingIfIn('hello',direction=False)
+print(c_true)
+fruit_ans = checkingIfIn('fruit')
+print(fruit_ans)
+param_check=checkingIfIn('HI',d={'HI':8})
+print(param_check)
+# %%
+
+""" Sorting list.sort and sorted(list) """
+ex_lst = ['hi', 'how are you', 'bye', 'apple', 'zebra', 'dance']
+
+def second_let(s):
+    return s[1]
+# using func
+# sorted_by_second_let = sorted(ex_lst,key=second_let)
+
+# using lambda
+sorted_by_second_let = sorted(ex_lst,key=lambda x:x[1])
+
+print(sorted_by_second_let)
+# %%
+""" sort list """
+nums = ['1450', '33', '871',
+ '19', '14378', '32',
+  '1005', '44', '8907', '16']
+
+def last_char(s):
+    # print(s[-1],end=" ")
+    return s[-1]
+# using function as key parameter
+nums_sorted = sorted(nums,key=last_char,reverse=True)
+# using Lambda
+nums_sorted_lambda = sorted(nums,key=lambda x:x[-1],reverse = True)
+print("\n",nums_sorted)
+print("\n",nums_sorted_lambda)
+# %%
+""" Sort freq dict """
+L = ['E', 'F', 'B', 'A', 'D', 'I', 'I', 'C', 'B', 'A', 'D', 'D', 'E', 'D']
+
+d = {}
+for x in L:
+    d[x] = d.get(x,0)+1 # create freq dict of list L
+
+# d.keys() is same as d where d is dict, both returns list of keys
+for x in sorted(d,key=lambda k: d[k],reverse=True):
+    print(f"{x} appears {d[x]} times")
+
+# %%
+"""" Sort breaking ties"""
+fruits = ['peach', 'kiwi', 'apple', 'blueberry', 'papaya', 'mango', 'pear']
+new_order = sorted(fruits, key=lambda fruit_name: (-len(fruit_name), fruit_name))
+for fruit in new_order:
+    print(fruit)
+
+# %%
+weather = {'Reykjavik': {'temp':60, 'condition': 'rainy'},
+           'Buenos Aires': {'temp': 55, 'condition': 'cloudy'},
+           'Cairo': {'temp': 96, 'condition': 'sunny'},
+           'Berlin': {'temp': 89, 'condition': 'sunny'},
+           'Caloocan': {'temp': 78, 'condition': 'sunny'}}
+
+sorted_weather = sorted(weather, key=lambda w: (w, weather[w]['temp']))
+print(sorted_weather)
+
+# %%
+medals = {'Japan':41, 'Russia':56, 'South Korea':21, 'United States':121, 'Germany':42, 'China':70}
+
+top_three=sorted(medals,key=lambda x:medals[x],reverse=True)[:3]
+print(top_three)
+# %%
+groceries = {'apples': 5, 'pasta': 3, 'carrots': 12, 'orange juice': 2, 'bananas': 8, 'popcorn': 1, 'salsa': 3, 'cereal': 4, 'coffee': 5, 'granola bars': 15, 'onions': 7, 'rice': 1, 'peanut butter': 2, 'spinach': 9}
+
+most_needed = sorted(groceries,key=lambda x:groceries[x],reverse=True)
 # %%
