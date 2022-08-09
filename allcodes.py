@@ -1095,6 +1095,10 @@ nums_sorted = sorted(nums,key=last_char,reverse=True)
 nums_sorted_lambda = sorted(nums,key=lambda x:x[-1],reverse = True)
 print("\n",nums_sorted)
 print("\n",nums_sorted_lambda)
+#%%
+winners = ['Alice Munro', 'Alvin E. Roth', 'Kazuo Ishiguro', 'Malala Yousafzai', 'Rainer Weiss', 'Youyou Tu']
+z_winners =sorted(winners,key=lambda x:x.split()[-1])
+
 # %%
 """ Sort freq dict """
 L = ['E', 'F', 'B', 'A', 'D', 'I', 'I', 'C', 'B', 'A', 'D', 'D', 'E', 'D']
