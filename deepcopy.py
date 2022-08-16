@@ -1,8 +1,8 @@
 #%%
 """ -----------------------------------
     Copy using = operator
-    creates a new variable
-     that shares the reference of the original object
+    creates a new variable that shares
+     the reference of the original object
     both have same ID
 """
 old_list = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]

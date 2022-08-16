@@ -1137,4 +1137,34 @@ print(top_three)
 groceries = {'apples': 5, 'pasta': 3, 'carrots': 12, 'orange juice': 2, 'bananas': 8, 'popcorn': 1, 'salsa': 3, 'cereal': 4, 'coffee': 5, 'granola bars': 15, 'onions': 7, 'rice': 1, 'peanut butter': 2, 'spinach': 9}
 
 most_needed = sorted(groceries,key=lambda x:groceries[x],reverse=True)
+
+
+# %%
+
+test = [
+  {
+    "Source": "Internet Movie Database",
+    "Value": "6.6/10"
+  },
+  {
+    "Source": "Rotten Tomatoes",
+    "Value": "30%"
+  },
+  {
+    "Source": "Metacritic",
+    "Value": "35/100"
+  }
+]
+if len(test) == 0:
+    print("Empty")
+else:    
+    for i in test:
+        if 'Rotten Tomatoes' in i['Source']:
+            print(i['Value'])
+    print("NO")
+# %%
+movies = {'Baby Mama': 64, 'The Five-Year Engagement': 63, 'Bachelorette': 56, 'The Heat': 65, 'Date Night': 67, 'Sherlock Holmes: A Game Of Shadows': 60, 'Yahşi Batı': 0, 'Eyyvah Eyvah': 0, 'Pirates Of The Caribbean: On Stranger Tides': 32, 'Prince Of Persia: The Sands Of Time': 36}
+sorted_movies = sorted(movies,key=lambda x: (movies[x],-len(x)),reverse = True)
+print(sorted_movies)
+
 # %%
