@@ -1156,12 +1156,12 @@ test = [
   }
 ]
 if len(test) == 0:
-    print("Empty")
+    print("Empty") #return 0
 else:    
     for i in test:
         if 'Rotten Tomatoes' in i['Source']:
-            print(i['Value'])
-    print("NO")
+            print(i['Value']) # return value
+    print("NO") # return 0
 # %%
 movies = {'Baby Mama': 64, 'The Five-Year Engagement': 63, 'Bachelorette': 56, 'The Heat': 65, 'Date Night': 67, 'Sherlock Holmes: A Game Of Shadows': 60, 'Yahşi Batı': 0, 'Eyyvah Eyvah': 0, 'Pirates Of The Caribbean: On Stranger Tides': 32, 'Prince Of Persia: The Sands Of Time': 36}
 sorted_movies = sorted(movies,key=lambda x: (movies[x],-len(x)),reverse = True)
