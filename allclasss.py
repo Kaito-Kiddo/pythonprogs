@@ -247,4 +247,50 @@ class Flying_Pokemon(Pokemon):
     p_type = "Flying"
 
 
+
 #%%
+""" try except codes """
+
+numb = [6, 0, 36, 8, 2, 36, 0, 12, 60, 0, 45, 0, 3, 23]
+
+remainder = []
+for i in numb:
+    try:
+        remainder += [36 % i]
+    except Exception as e:
+        remainder += ['Error']
+
+print(remainder)
+
+
+# %%
+
+lst = [2,4,10,42,12,0,4,7,21,4,83,8,5,6,8,234,5,6,523,42,34,0,234,1,435,465,56,7,3,43,23]
+
+lst_three = []
+
+for num in lst:
+    try:
+        if 3 % num == 0:
+            lst_three.append(num)
+    except ZeroDivisionError:
+        continue
+
+
+# %%
+res = input("""
+        xy has $ x and y
+
+        Category: aaa
+        Phrase:  aaa
+        Guessed: aaa
+
+        Guess a letter, phrase, or type 'exit' or 'pass':
+        """)
+print(res)
+# %%
+v='AEIOU'
+import random
+
+random.choice(v)
+# %%

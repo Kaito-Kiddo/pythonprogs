@@ -5,6 +5,7 @@ from itertools import count
 from operator import contains
 from statistics import mean
 from tokenize import group
+from xml.sax import parseString
 
 
 print("MAY the Force B with U")
@@ -1167,4 +1168,63 @@ movies = {'Baby Mama': 64, 'The Five-Year Engagement': 63, 'Bachelorette': 56, '
 sorted_movies = sorted(movies,key=lambda x: (movies[x],-len(x)),reverse = True)
 print(sorted_movies)
 
+# %%
+
+# path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\test imgs'
+# out_path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\testout'
+import os
+from PIL import Image
+path = r'.'
+files = os.listdir(path)
+out_path=r'/opt/icons/'
+for file in files:
+    # print(file)
+    img = Image.open(file)
+    img.rotate(270).resize((128,128)).save(f"{out_path}\{file}")
+# %%
+""" GOOGLE C6 W1 project """
+#!/usr/bin/python3
+import os
+from PIL import Image
+path = r'./images/'
+files = os.listdir(path)
+out_path=r'/opt/icons/'
+jp=".jpeg"
+for file in files:
+#    print(files)
+    if file != ".DS_Store":
+        img = Image.open(f'{path}{file}')
+        img.rotate(270).resize((128,128)).convert('RGB').save(f"{out_path}{file}{jp}")
+#        print(f"{out_path}{file}{jp}")
+
+
+#%%
+""" GOOGLE IT AUTO 
+    C6 W2 project 
+    """
+
+import os
+import requests
+
+# IP as given in lab 
+url = r"http://35.202.192.1/feedback/"
+# path for project
+path = r"/data/feedback/"
+# path for testing in local env
+path = r"C:\Users\kaito\Work Code\Coursera\Python for Everybody\test imgs\\"
+
+files = os.listdir(path)
+# print(files)
+for file in files:
+    if file.endswith(".txt"):
+        file_data = {}    
+        with open(f'{path}{file}') as f:
+            lines = f.readlines()
+            file_data['title'] = lines[0]
+            file_data['name'] = lines[1]
+            file_data['date'] = lines[2]
+            file_data['feedback'] = lines[3]
+        print(file_data)
+        res = requests.post(url,data=file_data)
+        print("status_code ",res.status_code)
 # %%
