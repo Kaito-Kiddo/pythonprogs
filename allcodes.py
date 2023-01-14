@@ -1,11 +1,10 @@
 #%%
-from cmath import isnan
-from curses.ascii import isalpha, isspace
+
 from itertools import count
 from operator import contains
 from statistics import mean
 from tokenize import group
-from xml.sax import parseString
+
 
 
 print("MAY the Force B with U")
@@ -1021,7 +1020,17 @@ def test(x,bool=True,dict1={2:3, 4:5, 6:8}):
         if x in dict1.keys():
             return dict1[x]
     return False
-    
+#%%
+
+#%%
+stopwords = ['to', 'a', 'for', 'by', 'an', 'am', 'the', 'so', 'it', 'and', 'The']
+sent = "The water earth and air are vital"
+acro=[]
+for i in sent.split():
+    if i not in stopwords:
+        acro.append(i[0:2].upper())
+acro='. '.join(acro)
+print(acro)    
 #%%
 
 def checkingIfIn(s,direction=True,d = {
@@ -1168,22 +1177,12 @@ movies = {'Baby Mama': 64, 'The Five-Year Engagement': 63, 'Bachelorette': 56, '
 sorted_movies = sorted(movies,key=lambda x: (movies[x],-len(x)),reverse = True)
 print(sorted_movies)
 
-# %%
 
-# path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\test imgs'
-# out_path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\testout'
-import os
-from PIL import Image
-path = r'.'
-files = os.listdir(path)
-out_path=r'/opt/icons/'
-for file in files:
-    # print(file)
-    img = Image.open(file)
-    img.rotate(270).resize((128,128)).save(f"{out_path}\{file}")
 # %%
 """ GOOGLE C6 W1 project """
+
 #!/usr/bin/python3
+# path = r'~/supplier-data/images'
 import os
 from PIL import Image
 path = r'./images/'
@@ -1210,6 +1209,7 @@ import requests
 url = r"http://35.202.192.1/feedback/"
 # path for project
 path = r"/data/feedback/"
+
 # path for testing in local env
 path = r"C:\Users\kaito\Work Code\Coursera\Python for Everybody\test imgs\\"
 
@@ -1227,4 +1227,140 @@ for file in files:
         print(file_data)
         res = requests.post(url,data=file_data)
         print("status_code ",res.status_code)
+# %%
+"""
+GOOGLE IT AUTO
+C3 W4
+"""
+#fruits dict
+fruits = {'peach' : 3, 'kiwi':2, 'apple':5, 'blueberry':7, 'papaya':4, 'mango':2, 'pear':1}
+fruit_labels = []
+fruit_data = []
+for fruit_name in sorted(fruits.keys()):
+    fruit_labels.append(fruit_name)
+    fruit_data.append(fruits[fruit_name])
+
+print("FRUITS - ",fruit_labels)
+
+print("No. of Fruits - ",fruit_data)
+# %%
+import reportlab
+inch = 100
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics.charts.piecharts import Pie
+report_pie = Pie(width=3*inch, height=3*inch)
+
+# %%
+# %%
+movies = {'Baby Mama': 64, 
+'The Five-Year Engagement': 63, 
+'Bachelorette': 56, 'The Heat': 65, 
+'Date Night': 67, 
+'Sherlock Holmes: A Game Of Shadows': 60,
+ 'Yahşi Batı': 0, 'Eyyvah Eyvah': 0, 
+ 'Pirates Of The Caribbean: On Stranger Tides': 32, 
+ 'Prince Of Persia: The Sands Of Time': 36}
+sorted_movies = sorted(movies,key=lambda x: movies[x],reverse=True)[0]
+print(sorted_movies)
+
+
+
+# %%
+"""
+GOOGLE IT 
+C6 W4
+
+""" 
+
+import psutil
+vir_mem = psutil.virtual_memory()
+
+print((vir_mem.available / (1024.0 **2)))
+print(psutil.swap_memory())
+print(psutil.cpu_percent(1))
+# %%
+# %%
+"""
+Change image file format 
+"""
+path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\test imgs'
+out_path = r'C:\Users\kaito\Work Code\Coursera\Python for Everybody\testout'
+import os
+from PIL import Image
+files = os.listdir(path)
+jp=".jpeg"
+# out_path=r'/opt/icons/'
+for file in files:
+    if file.endswith('.jpg'):
+        print(file)
+        img = Image.open(file)
+        
+        img.save(f"{path}\{file.replace('.jpg',jp)}")
+        # img.rotate(270).resize((128,128)).save(f"{out_path}\{file}")
+
+
+#%%
+"""  for google final project"""
+#!/usr/bin/env python3
+import requests
+import os
+url = "http://localhost/upload/"
+path ='supplier-data/images'
+files = os.listdir(path)
+for file in files:
+    if file.endswith(".jpeg"):
+        with open(os.path.join(path, file),"rb") as opened:
+            r = requests.post(url, files={"file":opened})
+            print(r.status_code)
+
+#%%
+
+#! /usr/bin/env python3
+
+import os
+import requests
+
+
+path = "supplier-data/descriptions/"
+url = "http://localhost/fruits/"
+files = os.listdir(path)
+files = os.listdir()
+# print(files)
+for file in files:
+    if file.endswith(".txt"):
+        file_data = {}    
+        with open(f'{path}{file}') as f:
+            lines = f.readlines()
+            file_data['name'] = lines[0].strip()
+            file_data['weight'] = int(lines[1].split()[0])
+            file_data['description'] = lines[2].strip()
+            file_data['image_name'] = file
+            res = requests.post(url, data=file_data)
+            print("status_code ",res.status_code)
+
+#%%
+while True:
+    txt = input("Enter a string: ")
+    if len(txt) < 1 : break
+
+    hv = 0
+    pos = 0
+    for let in txt:
+        pos = ( pos % 3 ) + 1  
+        hv = (hv + (pos * ord(let))) % 1000000
+        print(let, pos, ord(let), hv)
+
+    print(hv, txt)
+# %%
+import pandas
+import numpy as np
+# print(help(pandas.DataFrame.drop))
+print(help(np.sort))
+# %%
+import matplotlib.pyplot as plt
+
+def save_plot(x, y):
+  plt.plot(x, y)
+  plt.savefig('new_plot')
+save_plot(50,100)
 # %%

@@ -96,4 +96,27 @@ def get_related_titles(movies_list):
     return movies
 final_movie_list = get_related_titles(["Black Panther", "Captain Marvel"])
 print(final_movie_list)
+
+
+# %%
+"""
+test ix
+Script to get value of element in webpage url
+"""
+
+import requests
+import json
+from bs4 import BeautifulSoup
+from lxml import etree
+
+url = 'https://ixglobal.thedebtbox.com/users/33859/rewards/natg'
+res = requests.get(url)
+soup = BeautifulSoup(res.text, 'html.parser')
+# print(soup)
+xpathurl  = "/html/body/div[1]/section/div/div[1]/div[5]/div/dl/div[2]/div[1]/dd"
+xpathurl = """//*[@id="__next"]/section/div/div[1]/div[5]/div/dl/div[2]/div[1]/dd"""
+dom = etree.HTML(str(soup))
+print(dom.xpath(xpathurl))
+
+
 # %%
